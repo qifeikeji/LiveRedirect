@@ -1,26 +1,108 @@
 # LiveRedirect
 **肥羊影音数码综合Telegram交流群:[点击加入](https://t.me/feiyangdigital)**  
 **肥羊影音数码综合Telegram频道:[点击加入](https://t.me/feiyangofficalchannel)**  
-# 免责声明
-**本仓库或本仓库相关的仓库, 以下简称为本仓库**  
-**本仓库全部资源均搜集于互联网，如侵权请联系我删除**  
-**本仓库或本仓库相关的仓库的管理者, 以下简称为本仓库管理者**  
-**本仓库或本仓库相关的仓库的任何人员, 以下简称为本仓库人员**  
-**本仓库或本仓库相关的仓库内分享的任何内容, 以下简称为本仓库内容**  
-**本仓库内容，仅用于测试和学习研究，禁止用于商业用途，不得将其用于违反国家/地区/组织等的法律法规或相关规定的其他用途. 本仓库人员均不能保证其合法性，准确性，完整性和有效性，请根据情况自行判断. 禁止任何公众号、自媒体进行任何形式的转载、发布**  
-**本仓库内容的域名地址信息可以被任何人通过开发人员工具获取，没有经过逆向工程或网络攻击，不构成入侵计算机系统**   
-**本仓库人员对任何本仓库内容问题概不负责，包括但不限于由任何本仓库内容错误导致的任何损失或损害**  
-**间接使用本仓库内容的任何用户，包括但不限于建立 VPS 或在某些行为违反国家/地区法律或相关法规的情况下进行传播, 本仓库人员对于由此引起的任何隐私泄漏或其他后果概不负责**  
-**请勿将本仓库内容用于商业或非法目的，否则后果自负**  
-**如果任何单位或个人认为本仓库内容可能涉嫌侵犯其权利，则应及时通知并提供身份证明，所有权证明，本仓库管理者将在收到认证文件后删除相关本仓库内容**  
-**任何以任何方式查看本仓库内容的人或直接或间接使用本仓库内容的使用者都应仔细阅读此声明。本仓库管理者保留随时更改或补充此免责声明的权利。一旦使用/复制/修改了本仓库内容，则视为您已接受此免责声明**  
-**本仓库内容中涉及的第三方硬件、软件等，与本仓库内容没有任何直接或间接的关系。本仓库内容仅对部署和使用过程进行客观描述，不代表支持使用任何第三方硬件、软件。使用任何第三方硬件、软件，所造成的一切后果由使用的个人或组织承担，与本仓库内容无关**  
-**所有基于本仓库内容的源代码，进行的任何修改，为其他个人或组织的自发行为，与本仓库内容没有任何直接或间接的关系，所造成的一切后果亦与本仓库内容和本仓库人员无关**  
-**本仓库管理者保留随时对免责声明进行补充或更改的权利，直接或间接使用本仓库内容的个人或组织，视为接受本仓库分享的内容的免责声明**  
-**请不要在中华人民共和国境内使用本仓库内容**  
-**所有直接或间接使用本仓库内容的个人和组织，应 24 小时内完成学习和研究，并及时删除本仓库内容。如对本仓库内容的功能有需求，应自行开发相关功能**  
-**您必须在下载后的 24 小时内从您以任何形式存放或使用本仓库内容的任何硬件/软件/介质中完全删除本仓库内容**  
-**您以任何形式阅读/使用/复制/修改了本仓库内容，则视为已接受此免责声明，请仔细阅读**  
-# 致谢
-## 非常感谢JetBrains对本项目的大力支持：
-![Training Partner logo](https://resources.jetbrains.com/storage/products/company/brand/logos/jetbrains-training-partner.png)
+# **使用说明：**  
+**如果你没有软路由或者服务器，那么推荐白嫖Vercel使用，[点击查看部署方法](https://github.com/papagaye744/iptv-go)！**
+## 一、推荐使用Docker一键运行，并配置watchtower监听Docker镜像更新，直接一劳永逸：
+### 1，使用Docker一键配置allinone
+```
+docker run -d --restart unless-stopped --privileged=true -p 35455:35455 --name allinone youshandefeiyang/allinone
+```
+### 2，一键配置watchtower每天凌晨两点自动监听allinone镜像更新，同步GitHub仓库：
+```
+docker run -d --name watchtower --restart unless-stopped -v /var/run/docker.sock:/var/run/docker.sock  containrrr/watchtower -c  --schedule "0 0 2 * * *"
+```
+## 二、直接运行：
+首先去action中下载对应平台二进制执行文件，然后解压并直接执行
+```
+chmod 777 allinone && ./allinone
+```
+建议搭配进程守护工具进行使用，windows直接双击运行！
+## 三、详细使用方法
+## **Ysptp和Itv聚合M3U获取：**
+**声明：如果你是在公网服务器部署，不愿意开启聚合TV直播服务，在运行裸程序或者Docker时，加上参数 -tv=false 即可不开启直播服务，具体可[点击参考命令范例](https://t.me/feiyangofficalchannel/922)**
+```
+http://你的IP:35455/tv.m3u
+```
+## **虎牙、斗鱼、YY实时M3U获取：**
+### 虎牙一起看：
+```
+http://你的IP:35455/huyayqk.m3u
+```
+### 斗鱼一起看：
+```
+http://你的IP:35455/douyuyqk.m3u
+```
+### YY轮播：
+```
+http://你的IP:35455/yylunbo.m3u
+```
+### 如果使需要自定义M3U文件中的前缀域名，可以传入url参数（需要注意的是，当域名中含有特殊字符时，需要对链接进行urlencode处理）：
+```
+http://你的IP:35455/xxxyqk.m3u?url=http://192.168.10.1:35455
+```
+## **抖音：**
+### 默认最高画质，浏览器打开并复制`(live.douyin.com/)xxxxxx`，只需要复制后面的xxxxx即可（可选flv和hls两种种流媒体传输方式，默认flv）：
+```
+http://你的IP:35455/douyin/xxxxx(?stream=hls)
+```
+## **斗鱼：**
+### 1，可选m3u8和flv以及xs三种流媒体传输方式【`(www.douyu.com/)xxxxxx 或 (www.douyu.com/xx/xx?rid=)xxxxxx`，默认flv】：
+```
+http://你的IP:35455/douyu/xxxxx(?stream=flv)
+```
+## **BiliBili`(live.bilibili.com/)xxxxxx`：**
+### 1，平台platform参数选择（默认web，如果有问题，可以切换h5平台）：
+```
+"web"   => "桌面端"
+"h5"    => "h5端"
+```
+### 2，线路line参数选择（默认线路二，如果卡顿/看不了，请切换线路一或者三，一般直播间只会提供两条线路，所以建议线路一/二之间切换）：
+```
+"first"  => "线路一"
+"second" => "线路二"
+"third"  => "线路三"
+```
+### 3，画质quality参数选择（默认原画，可以看什么画质去直播间看看，能选什么画质就能加什么参数，参数错误一定不能播放）：
+```
+"30000" => "杜比"
+"20000" => "4K"
+"10000" => "原画"
+"400"   => "蓝光"
+"250"   => "超清"
+"150"   => "高清"
+"80"    => "流畅"
+```
+### 4，最后的代理链接示例：
+```
+http://你的IP:35455/bilibili/xxxxxx(?platform=h5&line=first&quality=10000)
+```
+## **虎牙`(huya.com/)xxxxxx`：**  
+### 1，查看可用CDN：
+```
+http://你的IP:35455/huya/xxxxx?type=display
+```
+### 2，切换媒体类型（默认flv，可选flv、hls）： 
+```
+http://你的IP:35455/huya/xxxxx?media=hls
+```
+### 3，切换CDN（默认hwcdn，可选hycdn、alicdn、txcdn、hwcdn、hscdn、wscdn，具体可先访问1获取）：
+```
+http://你的IP:35455/huya/xxxxx?cdn=alicdn
+```
+### 4，最后的代理链接示例：
+```
+http://你的IP:35455/huya/xxxxx(?media=xxx&cdn=xxx)
+```
+## **YouTube:**
+```
+https://www.youtube.com/watch?v=cK4LemjoFd0
+Rid: cK4LemjoFd0
+http://你的IP:35455/youtube/cK4LemjoFd0(?quality=1080/720...)
+```
+## **YY（默认最高画质，参数为4）:**
+```
+https://www.yy.com/xxxx
+http://你的IP:35455/yy/xxxx(?quality=1/2/3/4...)
+```
+## 更多平台后续会酌情添加
